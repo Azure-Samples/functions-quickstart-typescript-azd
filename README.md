@@ -1,57 +1,81 @@
-# Project Name
+# Azure Functions JavaScript HTTP Trigger using AZD
 
-(short, 1-3 sentenced, description of the project)
+This repository contains a Azure Functions HTTP trigger quickstart written in JavaScript and deployed to Azure using Azure Developer CLI (AZD). This sample uses manaaged identity and a virtual network to insure it is secure by default. 
 
 ## Features
 
 This project framework provides the following features:
 
-* Feature 1
-* Feature 2
-* ...
+* Azure Function HTTP trigger
+* Managed Identity
+* Virtual Network (VNet)
 
 ## Getting Started
 
 ### Prerequisites
 
-(ideally very short, if any)
+1) [Node.js 20](https://www.nodejs.org/) 
+2) [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cmacos%2Ccsharp%2Cportal%2Cbash#install-the-azure-functions-core-tools)
+3) [Azure Developer CLI (AZD)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 
-- OS
-- Library version
-- ...
+## Run on your local environment
 
-### Installation
+1) Add a file named local.settings.json file to the root of the project with the following contents. This will maake local debugging easier.
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing"
+  }
+}
+```
+2) Start Azurite storage emulator
+```bash
+docker run -p 10000:10000 -p 10001:10001 -p 10002:10002 mcr.microsoft.com/azure-storage/azurite
+```
 
-(ideally very short)
+### Using Functions CLI
+1) Open a new terminal and do the following:
 
-- npm install [package name]
-- mvn install
-- ...
+```bash
+npm install
+func start
+```
+2) Test the HTTP GET trigger by using the browser to open http://localhost:7071/api/httpGetFunction
 
-### Quickstart
-(Add steps to get up and running quickly)
+### Using Visual Studio Code
+1) Open this folder in a new terminal
+2) Open VS Code by entering `code .` in the terminal
+3) Press Run/Debug (F5) to run in the debugger
+4) Use same approach above to test using an HTTP REST client
 
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
+## Source Code
 
+The key code that makes this work is as follows in [src/functions/http.js](src/functions/http.js).  
 
-## Demo
+```javascript
+const { app } = require('@azure/functions');
 
-A demo app is included to show how to use the project.
+app.http('http', {
+    methods: ['GET', 'POST'],
+    authLevel: 'anonymous',
+    handler: async (request, context) => {
+        context.log(`Http function processed request for url "${request.url}"`);
 
-To run the demo, follow these steps:
+        const name = request.query.get('name') || await request.text() || 'world';
 
-(Add steps to start up the demo)
+        return { body: `Hello, ${name}!` };
+    }
+});
+```
 
-1.
-2.
-3.
+## Deploy to Azure
 
-## Resources
+The easiest way to deploy this app is using the [Azure Dev CLI aka AZD](https://aka.ms/azd).  If you open this repo in GitHub CodeSpaces the AZD tooling is already preinstalled.
 
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+To provision and deploy:
+```bash
+azd up
+```
