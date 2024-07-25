@@ -11,6 +11,7 @@ param virtualNetworkSubnetId string = ''
 param identityType string
 @description('User assigned identity name')
 param identityId string
+param identityClientId string
 
 // Runtime Properties
 @allowed([
@@ -25,6 +26,8 @@ param kind string = 'functionapp,linux'
 param appSettings object = {}
 param instanceMemoryMB int = 2048
 param maximumInstanceCount int = 100
+
+var applicationInsightsIdentity = 'ClientId=${identityClientId};Authorization=AAD'
 
 resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
   name: storageAccountName
@@ -73,6 +76,7 @@ resource functions 'Microsoft.Web/sites@2023-12-01' = {
         AzureWebJobsStorage__accountName: stg.name
         AzureWebJobsStorage__credential : 'managedidentity'
         APPLICATIONINSIGHTS_CONNECTION_STRING: applicationInsights.properties.ConnectionString
+        APPLICATIONINSIGHTS_AUTHENTICATION_STRING: applicationInsightsIdentity
       })
   }
 }

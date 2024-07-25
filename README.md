@@ -20,7 +20,7 @@ This project framework provides the following features:
 
 ## Run on your local environment
 
-1) Add a file named local.settings.json file to the root of the project with the following contents. This will maake local debugging easier.
+1) Add a file named local.settings.json file to the root of the project with the following contents. This will allow you to debug your function locally.
 ```json
 {
   "IsEncrypted": false,
