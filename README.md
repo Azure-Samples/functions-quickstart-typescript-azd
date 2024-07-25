@@ -1,3 +1,16 @@
+---
+page_type: sample
+languages:
+- csharp
+- python
+- java
+- nodejs
+- typescript
+- json
+products:
+- azure-functions
+- azure
+---
 # Azure Functions JavaScript HTTP Trigger using AZD
 
 This repository contains a Azure Functions HTTP trigger quickstart written in JavaScript and deployed to Azure using Azure Developer CLI (AZD). This sample uses manaaged identity and a virtual network to insure it is secure by default. 
