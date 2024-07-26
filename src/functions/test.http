@@ -2,7 +2,7 @@ GET http://localhost:7071/api/httpGetFunction HTTP/1.1
 
 ###
 
-POST https://func-yu5mdqomwvng2-functions.azurewebsites.net/api/httpPostBodyFunction?code=h7wf56hBJRQebVmeO22756aEziNA4ylmgqYSu4NlB3EmAzFufkr_Jw%3D%3D HTTP/1.1
+POST http://localhost:7071/api/httpPostBodyFunction HTTP/1.1
 content-type: application/json
 
 {
