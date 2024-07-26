@@ -50,7 +50,7 @@ func start
 
 2) Test the HTTP GET trigger using the browser to open http://localhost:7071/api/httpGetFunction
 
-3) Test the HTTP POST trigger by opening a command prompt (NOT PowerShell) and navigate to the src/functions folder of the project and run:
+3) Test the HTTP POST trigger by opening a new command prompt (NOT PowerShell) and navigate to the src/functions folder of the project and run:
 
 ```bash
 curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type: text/json" --data-binary "@testdata.json"
