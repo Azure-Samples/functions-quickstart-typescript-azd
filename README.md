@@ -49,16 +49,9 @@ func start
 
 2) Test the HTTP GET trigger using the browser to open http://localhost:7071/api/httpGetFunction
 
-3) Test the HTTP POST trigger by opening a new command prompt (NOT PowerShell) and navigate to the src/functions folder of the project and run:
-
-Bash or zsh
+3) Test the HTTP POST trigger in a new terminal window:
 ```bash
-curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type: text/json" --data-binary "@testdata.json"
-```
-
-PowerShell
-```powershell
-mike to uypdate
+curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type: text/json" --data-binary "@src/functions/testdata.json"
 ```
 
 ### Using Visual Studio Code
