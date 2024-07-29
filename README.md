@@ -34,8 +34,7 @@ This repository contains a Azure Functions HTTP trigger quickstart written in Ja
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing"
+    "FUNCTIONS_WORKER_RUNTIME": "node"
   }
 }
 ```
@@ -52,8 +51,14 @@ func start
 
 3) Test the HTTP POST trigger by opening a new command prompt (NOT PowerShell) and navigate to the src/functions folder of the project and run:
 
+Bash or zsh
 ```bash
 curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type: text/json" --data-binary "@testdata.json"
+```
+
+PowerShell
+```powershell
+mike to uypdate
 ```
 
 ### Using Visual Studio Code
