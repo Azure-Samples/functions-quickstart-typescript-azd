@@ -25,6 +25,12 @@ This repository contains a Azure Functions HTTP trigger quickstart written in Ja
 3) [Azure Developer CLI (AZD)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 4) [Visual Studio Code](https://code.visualstudio.com/) - Only required if using VS Code to run locally
 
+### Get repo on your local machine
+Run the following GIT command to clone this repository to your local machine.
+```bash
+git clone https://github.com/Azure-Samples/functions-quickstart-javascript-azd.git
+```
+
 ## Run on your local environment
 
 ### Prepare your local environment
