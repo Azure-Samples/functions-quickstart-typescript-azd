@@ -34,7 +34,7 @@ git clone https://github.com/Azure-Samples/functions-quickstart-javascript-azd.g
 ## Run on your local environment
 
 ### Prepare your local environment
-1) Add a file named local.settings.json file to the root of the project with the following contents. This will allow you to run your function locally.
+1) Create a file named `local.settings.json` and add the following:
 ```json
 {
   "IsEncrypted": false,
@@ -67,6 +67,61 @@ curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type:
 4) Insure your favorite REST clientextension is installed (e.g. [RestClient in VS Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), PostMan, etc.)
 5) Open the file src/functions/test/ which contains a GET and POST test
 6) Click the "Send Request" link for each and see the results in the right-hand pane that opens
+
+## Source Code
+
+The key code that makes tthese functions work is in `./src/functions/httpGetFunction.cs` and `.src/functions/httpPostBodyFunction.cs`.  The function is identified as an Azure Function by use of the `@azure/functions` library. This code shows a HTTP GET triggered function.  
+
+```javascript
+const { app } = require('@azure/functions');
+
+app.http('httpGetFunction', {
+    methods: ['GET'],
+    authLevel: 'function',
+    handler: async (request, context) => {
+        context.log(`Http function processed request for url "${request.url}"`);
+
+        const name = request.query.get('name') || await request.text() || 'world';
+
+        return { body: `Hello, ${name}!` };
+    }
+});
+```
+This code shows a HTTP POST triggered function which expects `person` object with `name` and `age` values in the request.
+
+```javascript
+const { app } = require('@azure/functions');
+
+app.http('httpPostBodyFunction', {
+    methods: ['POST'],
+    authLevel: 'function',
+    handler: async (request, context) => {
+        context.log(`Http function processed request for url "${request.url}"`);
+
+        try {
+            const person = await request.json();
+            const { name, age } = person;
+
+            if (!name || !age) {
+                return {
+                    status: 400,
+                    body: 'Please provide both name and age in the request body.'
+                };
+            }
+
+            return {
+                status: 200,
+                body: `Hello, ${name}! You are ${age} years old.`
+            };
+        } catch (error) {
+            return {
+                status: 400,
+                body: 'Invalid request body. Please provide a valid JSON object with name and age.'
+            };
+        }
+    }
+});
+```
 
 ## Deploy to Azure
 
