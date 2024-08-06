@@ -55,7 +55,8 @@ func start
 
 2) Test the HTTP GET trigger using the browser to open http://localhost:7071/api/httpGetFunction
 
-3) Test the HTTP POST trigger in a new terminal window:
+3) Test the HTTP POST trigger in a new terminal window with the following command, or use your favorite REST client, e.g. [RestClient in VS Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), PostMan, curl. `test.http` has been provided to run this quickly.
+
 ```bash
 curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type: text/json" --data-binary "@src/functions/testdata.json"
 ```
@@ -63,10 +64,10 @@ curl -i -X POST http://localhost:7071/api/httppostbodyfunction -H "Content-Type:
 ### Using Visual Studio Code
 1) Open this folder in a new terminal
 2) Open VS Code by entering `code .` in the terminal
-3) Press Run/Debug (F5) to run in the debugger (select "Debug anyway" if prompted about local emulater not running) 
-4) Insure your favorite REST clientextension is installed (e.g. [RestClient in VS Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), PostMan, etc.)
-5) Open the file src/functions/test/ which contains a GET and POST test
-6) Click the "Send Request" link for each and see the results in the right-hand pane that opens
+3) Make sure the Azure Functions extension is installed
+4) Add a **.vscode** folder by running *"Azure Functions: Initialize project for use with VS Code"* in the Command Pallete
+5) Press Run/Debug (F5) to run in the debugger (select "Debug anyway" if prompted about local emulater not running) 
+6) Use same approach above to test using an HTTP REST client
 
 ## Source Code
 
