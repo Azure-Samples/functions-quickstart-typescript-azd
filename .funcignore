@@ -2,9 +2,9 @@
 *.ts
 .git*
 .vscode
-__azurite_db*__.json
-__blobstorage__
-__queuestorage__
 local.settings.json
 test
-tsconfig.json
+getting_started.md
+node_modules/@types/
+node_modules/azure-functions-core-tools/
+node_modules/typescript/
