@@ -42,6 +42,8 @@ build/Release
 node_modules/
 jspm_packages/
 
+# TypeScript v1 declaration files
+typings/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -76,6 +78,7 @@ web_modules/
 .env
 .env.development.local
 .env.test.local
+.env.test
 .env.production.local
 .env.local
 
@@ -116,6 +119,20 @@ dist
 # DynamoDB Local files
 .dynamodb/
 
+# TypeScript output
+dist
+out
+
+# Azure Functions artifacts
+bin
+obj
+appsettings.json
+local.settings.json
+
+# Azurite artifacts
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json
 # TernJS port file
 .tern-port
 
