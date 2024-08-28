@@ -8,7 +8,7 @@ export async function httpGetFunction(request: HttpRequest, context: InvocationC
     return { body: `Hello, ${name}!` };
 };
 
-app.http('httpGetFunction', {
+app.http('httpget', {
     methods: ['GET'],
     authLevel: 'function',
     handler: httpGetFunction

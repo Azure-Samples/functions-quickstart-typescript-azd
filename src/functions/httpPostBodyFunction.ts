@@ -36,7 +36,7 @@ export async function httpPostBodyFunction(request: HttpRequest, context: Invoca
         }
 };
 
-app.http('httpPostBodyFunction', {
+app.http('httppost', {
     methods: ['POST'],
     authLevel: 'function',
     handler: httpPostBodyFunction
