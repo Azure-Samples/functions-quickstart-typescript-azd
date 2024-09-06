@@ -90,7 +90,7 @@ Add a file named `local.settings.json` in the root of your project with the foll
 
 ## Source Code
 
-The source code for the GET and POST functions are in the [`httpGetFunction.ts`](./src/functions/httpGetFunction.ts) and [`httpPostBodyFunction.ts`](./src/functions/httpPostBodyFunction.ts) code files, respectively. Azure Functions requires the use of the `@azure/functions` library.
+The source code for the GET and POST functions is in the [`httpGetFunction.ts`](./src/functions/httpGetFunction.ts) and [`httpPostBodyFunction.ts`](./src/functions/httpPostBodyFunction.ts) code files, respectively. Azure Functions requires the use of the `@azure/functions` library.
 
 This code shows an HTTP GET triggered function:
 
