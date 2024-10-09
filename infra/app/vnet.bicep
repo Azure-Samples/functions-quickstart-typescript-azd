@@ -12,7 +12,7 @@ param appSubnetName string = 'app'
 
 param tags object = {}
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-11-01' = {
   name: vNetName
   location: location
   tags: tags
@@ -29,7 +29,6 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
     subnets: [
       {
         name: peSubnetName
-        id: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName, 'private-endpoints-subnet')
         properties: {
           addressPrefixes: [
             '10.0.1.0/28' // allows for 11 usable IP addresses
@@ -38,14 +37,17 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
         }
-        type: 'Microsoft.Network/virtualNetworks/subnets'
       }
       {
         name: appSubnetName
-        id: resourceId('Microsoft.Network/virtualNetworks/subnets', vNetName, 'app')
         properties: {
           addressPrefixes: [
             '10.0.2.0/26' // allows for 59 usable IP addresses
+          ]
+          serviceEndpoints: [
+            {
+              service: 'Microsoft.Storage'
+            }
           ]
           delegations: [
             {
@@ -55,21 +57,23 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
                 //Microsoft.App/environments is the correct delegation for Flex Consumption VNet integration
                 serviceName: 'Microsoft.App/environments'
               }
-              type: 'Microsoft.Network/virtualNetworks/subnets/delegations'
             }
           ]
           privateEndpointNetworkPolicies: 'Disabled'
           privateLinkServiceNetworkPolicies: 'Enabled'
         }
-        type: 'Microsoft.Network/virtualNetworks/subnets'
       }
     ]
     virtualNetworkPeerings: []
     enableDdosProtection: false
+  }
+
+  resource appSubnet 'subnets' existing = {
+    name: appSubnetName
   }
 }
 
 output peSubnetName string = virtualNetwork.properties.subnets[0].name
 output peSubnetID string = virtualNetwork.properties.subnets[0].id
 output appSubnetName string = virtualNetwork.properties.subnets[1].name
-output appSubnetID string = virtualNetwork.properties.subnets[1].id
+output appSubnetID string = virtualNetwork::appSubnet.id
