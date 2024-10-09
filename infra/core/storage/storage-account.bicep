@@ -9,7 +9,15 @@ param containers array = []
 param kind string = 'StorageV2'
 param minimumTlsVersion string = 'TLS1_2'
 param sku object = { name: 'Standard_LRS' }
+param allowedIpAddresses array
 param virtualNetworkSubnetId string
+
+var ipRules = [
+  for ipAddress in allowedIpAddresses: {
+    action: 'Allow'
+    value: ipAddress
+  }
+]
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: name
@@ -26,6 +34,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
     networkAcls: {
       bypass: 'AzureServices'
       defaultAction: 'Deny'
+      ipRules: ipRules
       virtualNetworkRules: [
         {
           id: virtualNetworkSubnetId

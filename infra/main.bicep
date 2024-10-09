@@ -15,6 +15,9 @@ param environmentName string
 })
 param location string
 
+@description('List of the public IP addresses allowed to connect to the storage account.')
+param allowedIpAddresses array
+
 param processorServiceName string = ''
 param processorUserAssignedIdentityName string = ''
 param applicationInsightsName string = ''
@@ -78,6 +81,7 @@ module storage './core/storage/storage-account.bicep' = {
     tags: tags
     containers: [{name: 'deploymentpackage'}]
     publicNetworkAccess: 'Enabled'
+    allowedIpAddresses:allowedIpAddresses
     virtualNetworkSubnetId: serviceVirtualNetwork.outputs.appSubnetID
   }
 }
