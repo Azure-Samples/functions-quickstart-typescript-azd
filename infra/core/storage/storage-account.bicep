@@ -22,11 +22,10 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
     allowBlobPublicAccess: allowBlobPublicAccess
     publicNetworkAccess: publicNetworkAccess
     allowSharedKeyAccess: false
-    //defaultToOAuthAuthentication: true
+    defaultToOAuthAuthentication: true
     networkAcls: {
       bypass: 'AzureServices'
       defaultAction: 'Deny'
-      //virtualNetworkRules: map([virtualNetworkSubnetId], subnetId => { id: subnetId })
       virtualNetworkRules: [
         {
           id: virtualNetworkSubnetId
