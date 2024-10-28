@@ -11,6 +11,7 @@ param minimumTlsVersion string = 'TLS1_2'
 param sku object = { name: 'Standard_LRS' }
 param allowedIpAddresses array = []
 param virtualNetworkSubnetId string
+param allowNetworkServices bool = true
 
 var ipRules = [
   for ipAddress in allowedIpAddresses: {
@@ -31,16 +32,22 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
     publicNetworkAccess: publicNetworkAccess
     allowSharedKeyAccess: false
     defaultToOAuthAuthentication: true
-    networkAcls: {
-      bypass: 'AzureServices'
-      defaultAction: 'Deny'
-      ipRules: empty(allowedIpAddresses) ? [] : ipRules
-      virtualNetworkRules: [
-        {
-          id: virtualNetworkSubnetId
+    networkAcls: allowNetworkServices
+      ? {
+          bypass: 'AzureServices'
+          defaultAction: 'Deny'
+          ipRules: empty(allowedIpAddresses) ? [] : ipRules
+          virtualNetworkRules: [
+            {
+              id: virtualNetworkSubnetId
+            }
+          ]
         }
-      ]
-    }
+      : {
+          defaultAction: 'Deny'
+          ipRules: []
+          virtualNetworkRules: []
+        }
   }
 
   resource blobServices 'blobServices' = if (!empty(containers)) {

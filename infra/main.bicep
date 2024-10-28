@@ -18,6 +18,7 @@ param location string
 @description('List of the public IP addresses allowed to connect to the storage account.')
 param allowedIpAddresses array = []
 
+param skipVnet bool = true
 param processorServiceName string = ''
 param processorUserAssignedIdentityName string = ''
 param applicationInsightsName string = ''
@@ -67,7 +68,7 @@ module processor './app/processor.bicep' = {
     identityClientId: processorUserAssignedIdentity.outputs.identityClientId
     appSettings: {
     }
-    virtualNetworkSubnetId: serviceVirtualNetwork.outputs.appSubnetID
+    virtualNetworkSubnetId: skipVnet ? '' : serviceVirtualNetwork.outputs.appSubnetID
   }
 }
 
@@ -83,6 +84,7 @@ module storage './core/storage/storage-account.bicep' = {
     publicNetworkAccess: 'Enabled'
     allowedIpAddresses:allowedIpAddresses
     virtualNetworkSubnetId: serviceVirtualNetwork.outputs.appSubnetID
+    allowNetworkServices: skipVnet ? false : true
   }
 }
 
