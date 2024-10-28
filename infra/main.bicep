@@ -16,7 +16,7 @@ param environmentName string
 param location string
 
 @description('List of the public IP addresses allowed to connect to the storage account.')
-param allowedIpAddresses array
+param allowedIpAddresses array = []
 
 param processorServiceName string = ''
 param processorUserAssignedIdentityName string = ''
