@@ -8,7 +8,7 @@ param runtimeName string
 param runtimeVersion string 
 param serviceName string = 'processor'
 param storageAccountName string
-param virtualNetworkSubnetId string = ''
+param virtualNetworkSubnetId string
 param instanceMemoryMB int = 2048
 param maximumInstanceCount int = 100
 param identityId string = ''
