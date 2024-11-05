@@ -1,3 +1,4 @@
+<!--
 ---
 name: Azure Functions TypeScript HTTP Trigger using Azure Developer CLI
 description: This repository contains an Azure Functions HTTP trigger quickstart written in TypeScript and deployed to Azure Functions Flex Consumption using the Azure Developer CLI (azd). The sample uses managed identity and a virtual network to make sure deployment is secure by default.
@@ -13,6 +14,7 @@ products:
 - entra-id
 urlFragment: functions-quickstart-typescript-azd
 ---
+-->
 
 # Azure Functions TypeScript HTTP Trigger using Azure Developer CLI
 
