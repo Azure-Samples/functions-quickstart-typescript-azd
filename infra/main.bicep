@@ -57,7 +57,7 @@ param resourceGroupName string = ''
 param storageAccountName string = ''
 param vNetName string = ''
 @description('Id of the user identity to be used for testing and debugging. This is not required in production. Leave empty if not needed.')
-param principalId string = ''
+param principalId string = deployer().objectId
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
