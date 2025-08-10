@@ -24,7 +24,7 @@ This source code supports the article [Quickstart: Create and deploy functions t
 
 ## Prerequisites
 
-+ [Node.js 20](https://www.nodejs.org/)
++ [Node.js 22](https://www.nodejs.org/)
 + [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local?pivots=programming-language-typescript#install-the-azure-functions-core-tools)
 + [Azure Developer CLI (AZD)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 + To use Visual Studio Code to run and debug locally:
