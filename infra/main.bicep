@@ -106,7 +106,9 @@ module api './app/api.bicep' = {
   params: {
     name: functionAppName
     location: location
-    tags: tags
+    tags: union(tags, {
+      'azd-service-name': 'api'
+    })
     applicationInsightsName: monitoring.outputs.name
     appServicePlanId: appServicePlan.outputs.resourceId
     runtimeName: 'node'
