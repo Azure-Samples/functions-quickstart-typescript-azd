@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "functions-quickstart-typescript-azd",
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/{index.js,functions/*.js}",
@@ -12,7 +12,7 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0"
+    "@azure/functions": "^4.11.0"
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x",
