@@ -25,6 +25,7 @@ This source code supports the article [Quickstart: Create and deploy functions t
 ## Prerequisites
 
 + [Node.js 20](https://www.nodejs.org/)
++ [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite) (for local storage emulation)
 + [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local?pivots=programming-language-typescript#install-the-azure-functions-core-tools)
 + [Azure Developer CLI (AZD)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 + To use Visual Studio Code to run and debug locally:
@@ -51,24 +52,20 @@ You can initialize a project from this `azd` template in one of these ways:
     ```
 
     You can also clone the repository from your own fork in GitHub.
+## Local settings
 
-## Prepare your local environment
+The `local.settings.json` file is included in this template with default values for local development. This file is excluded from deployment by `.funcignore`.
 
-Add a file named `local.settings.json` in the root of your project with the following contents:
-
-```json
-{
-    "IsEncrypted": false,
-    "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "node"
-    }
-}
-```
 
 ## Run your app from the terminal
 
-1. Run these commands in the virtual environment:
+1. Start Azurite for local storage emulation. In a separate terminal, run:
+
+    ```shell
+    azurite
+    ```
+
+1. Run these commands to start the Functions host:
 
     ```shell
     npm install
