@@ -1,0 +1,10 @@
+# This descriptor drives template package creation in the packaging pipeline.
+schemaVersion: 1
+identity: Azure.Functions.Templates.HttpTypeScript
+description: Create a TypeScript Azure Functions app for HTTP Trigger, with Bicep infrastructure for deployment using azd.
+projects:
+- name: Azure Functions HTTP Trigger (TypeScript)
+  shortName: functions-quickstart-typescript-http
+  root: .
+  stack: node
+  language: TypeScript
